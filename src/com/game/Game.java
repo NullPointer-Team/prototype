@@ -63,7 +63,7 @@ public class Game {
         } else {
             System.out.println("In your inventory, you have:     ");
             for (String item: inventory) {
-                System.out.println("      -" + item);
+                System.out.println("      - a" + item);
             }
         }
     }
@@ -84,17 +84,19 @@ public class Game {
             }
 
             String[] moves = move.toLowerCase().split("\\s+");
-
-            if (moves[0] == "go") {
+            System.out.println(moves[0]);
+            System.out.println(moves[1]);
+            if (moves[0].toLowerCase().equals("go")) {
                 if (rooms.get(currentRoom).containsKey(moves[1])) {
-                    currentRoom = moves[1];
+                    currentRoom = rooms.get(currentRoom).get(moves[1]);
+                    System.out.println("New room is " + currentRoom);
                 } else {
                     System.out.println("You can\'t go that way!");
                 }
             }
 
-            if (moves[0] == "get") {
-                if (rooms.get(currentRoom).get("item") == moves[1]) {
+            if (moves[0].toLowerCase().equals("get")) {
+                if (rooms.get(currentRoom).get("item").toLowerCase().equals(moves[1])) {
                     inventory.add(moves[1]);
                     System.out.println(moves[1] + " acquired!!");
                 } else {
